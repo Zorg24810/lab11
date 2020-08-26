@@ -1,0 +1,27 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!-- Информация пользователя -->
+@await Component.InvokeAsync("Cart")
+<div class="dropdown ml-4 nav-color">
+    <div class="dropdown-toggle" id="dropdownMenuButton"
+         data-toggle="dropdown"
+         aria-haspopup="true" aria-expanded="false">
+        <img src="~/images/avatar.jpg" width="30" alt="User"
+             class="rounded" />
+    </div>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-item-text">
+            <img src="~/images/avatar.jpg" width="50" alt="User"
+                 class="rounded" />
+            user@mail.ru
+        </div>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" asp-controller="Cart" aspaction="Index">Мои товары</a>
+        <a class="dropdown-item" asp-area="Identity"
+           asp-page="/Account/Logout">Log off</a>
+    </div>
+</div>
+<!-- Информация пользователя - конец -->
