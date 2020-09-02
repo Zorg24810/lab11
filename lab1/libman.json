@@ -5,6 +5,11 @@
     {
       "library": "font-awesome@5.11.2",
       "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "bs-custom-file-input@1.3.4",
+      "destination": "wwwroot/lib/bs-custom-file-input/"
     }
   ]
 }

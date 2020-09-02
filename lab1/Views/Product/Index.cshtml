@@ -1,0 +1,46 @@
+﻿
+@using WebLabsV05.Entities
+
+@model IEnumerable<Auto>
+
+@{
+    ViewData["Title"] = "Auto";
+}
+
+<div class="row"><div class="card-deck">
+    @foreach (var item in Model)
+    {
+        <div class='card m-2 p-1 text-center col-4'>
+            <img src="~/Images/@item.Image"
+                 alt='NoImage'
+                 class="card-img-top" />
+            <div class="card-body">
+                    <h5 class="card-title">
+                        @item.AutoName
+                    </h5>
+                    <p class="card-text">
+                        @item.Description
+                    </p>
+                    <div class="card-text badge badge-secondary">
+                        <h6>@item.AutoCost цена</h6>
+                    </div>
+                @{ // Получение текущего адреса
+                    var request = ViewContext.HttpContext.Request;
+                    var returnUrl = request.Path +
+                    request.QueryString.ToUriComponent();
+                }
+                <!--Разметка кнопки добавления в корзину-->
+                    <p class="mt-2">
+                        <a asp-action="Add"
+                           asp-controller="Cart"
+                           asp-route-id="@item.AutoId"
+                           asp-route-returnUrl="@returnUrl"
+                           class="btn btn-primary">
+                            <i class="fa fa-shopping-cart"></i> В корзину
+                        </a>
+                    </p>
+            </div>
+        </div>
+    }
+</div>
+</div>
