@@ -1,27 +1,59 @@
-﻿@*
+﻿@using Microsoft.AspNetCore.Identity;
+@using WebLabsV05.DAL.Entities;
+@inject SignInManager<ApplicationUser> signInManager
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
 <!-- Информация пользователя -->
-@await Component.InvokeAsync("Cart")
-<div class="dropdown ml-4 nav-color">
-    <div class="dropdown-toggle" id="dropdownMenuButton"
-         data-toggle="dropdown"
-         aria-haspopup="true" aria-expanded="false">
-        <img src="~/images/avatar.jpg" width="30" alt="User"
-             class="rounded" />
-    </div>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <div class="dropdown-item-text">
-            <img src="~/images/avatar.jpg" width="50" alt="User"
+@if (signInManager.IsSignedIn(User))
+{
+
+    @await Component.InvokeAsync("Cart")
+    <div class="dropdown ml-4 nav-color">
+        <div class="dropdown-toggle" id="dropdownMenuButton"
+             data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+            <img src="~/images/avatar.jpg" width="30" alt="User"
                  class="rounded" />
-            user@mail.ru
         </div>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" asp-controller="Cart" aspaction="Index">Мои товары</a>
-        <a class="dropdown-item" asp-area="Identity"
-           asp-page="/Account/Logout">Log off</a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-item-text">
+                <img src="~/images/avatar.jpg" width="50" alt="User"
+                     class="rounded" />
+                @User.Identity.Name
+            </div>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" asp-controller="Cart" aspaction="Index">Мои товары</a>
+            <form asp-area="Identity"
+                  asp-page="/Account/Logout"
+                  asp-route-returnurl="@ViewContext.HttpContext.Request.Path">
+                <input type="submit"
+                       value="Log off"
+                       class="dropdown-item" />
+            </form>
+
+        </div>
     </div>
-</div>
+}
+else
+{
+    <ul class="nav navbar-nav ml-auto">
+        <li>
+            <a class="nav-item nav-link"
+               asp-area="Identity"
+               asp-page="/Account/Login">
+                Войти
+            </a>
+        </li>
+        <li>
+            <a class="nav-item nav-link"
+               asp-area="Identity"
+               asp-page="/Account/Register">
+                Зарегистрироваться
+            </a>
+        </li>
+    </ul>
+}
 <!-- Информация пользователя - конец -->
