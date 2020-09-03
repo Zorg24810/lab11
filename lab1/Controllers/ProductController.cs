@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using lab1.Models;
 using Microsoft.AspNetCore.Mvc;
 using WebLabsV05.Entities;
 
@@ -9,16 +10,25 @@ namespace lab1.Controllers
 {
     public class ProductController : Controller
     {
-        List<Auto> _autos;
+        public List<Auto> _autos;
         List<AutoGroup> _autoGroups;
+
+        int _pageSize;
 
         public ProductController()
         {
+            _pageSize = 3;
             SetupData();
         }
-        public IActionResult Index()
+        
+        public IActionResult Index(int? group, int pageNo = 1)
         {
-            return View(_autos);
+            var autosFiltered = _autos.Where(d => !group.HasValue || d.AutoGroupId == group.Value);
+            // Поместить список групп во ViewData
+            ViewData["Groups"] = _autoGroups;
+            // Получить id текущей группы и поместить в TempData
+            ViewData["CurrentGroup"] = group ?? 0;
+            return View(ListViewModel<Auto>.GetModel(autosFiltered, pageNo, _pageSize));
         }
         /// <summary>
         /// Инициализация списков
