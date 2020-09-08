@@ -42,11 +42,14 @@
         </div>
     </div>
     <div class="col-10">
-        <div class="card-deck">
-            @foreach (var item in Model)
-            {
-                <partial name="_ListItemPartial" model="@item" />
-            }
+        <div class="card-group" id="list">
+            <partial name="_ListPartial" model="@Model" />
         </div>
+        <pager page-current="@Model.CurrentPage"
+               page-total="@Model.TotalPages"
+               action="Index"
+               controller="Product"
+               group-id="@currentGroup">
+        </pager>
     </div>
 </div>

@@ -1,0 +1,6 @@
+﻿@using WebLabsV05.Entities;
+@model ListViewModel<Auto>
+@foreach (var item in Model)
+{
+    <partial name="_ListItemPartial" model="@item" />
+}
