@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace WebLabsV05.Entities
 {
     public class Auto
     {
+        [Key]
         public int AutoId { get; set; } // id Авто
         public string AutoName { get; set; } // Марка авто
         public string Description { get; set; } // год выпуска

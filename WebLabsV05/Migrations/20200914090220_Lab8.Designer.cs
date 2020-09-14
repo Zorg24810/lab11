@@ -10,14 +10,14 @@ using WebLabsV05.DAL.Data;
 namespace WebLabsV05.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200902102150_Avatar")]
-    partial class Avatar
+    [Migration("20200914090220_Lab8")]
+    partial class Lab8
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.7")
+                .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -220,6 +220,50 @@ namespace WebLabsV05.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("WebLabsV05.Entities.Auto", b =>
+                {
+                    b.Property<int>("AutoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AutoCost")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AutoGroupId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AutoName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AutoId");
+
+                    b.HasIndex("AutoGroupId");
+
+                    b.ToTable("Autos");
+                });
+
+            modelBuilder.Entity("WebLabsV05.Entities.AutoGroup", b =>
+                {
+                    b.Property<int>("AutoGroupId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("GroupName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AutoGroupId");
+
+                    b.ToTable("AutoGroups");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -267,6 +311,15 @@ namespace WebLabsV05.Migrations
                     b.HasOne("WebLabsV05.DAL.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebLabsV05.Entities.Auto", b =>
+                {
+                    b.HasOne("WebLabsV05.Entities.AutoGroup", "Group")
+                        .WithMany("Autos")
+                        .HasForeignKey("AutoGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

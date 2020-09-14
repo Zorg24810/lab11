@@ -12,19 +12,19 @@ namespace Lab11.Tests
 {
     public class ProductControllerTests
     {
-        [Fact]
-        public void ControllerSelectsGroup()
-        {
-            // Контекст контроллера
-            var controllerContext = new ControllerContext();
-            // Макет HttpContext
-            var moqHttpContext = new Mock<HttpContext>();
-            moqHttpContext.Setup(c => c.Request.Headers)
-            .Returns(new HeaderDictionary());
-            controllerContext.HttpContext = moqHttpContext.Object;
-            var controller = new ProductController()
-            { ControllerContext = controllerContext };
-        }
+        //[Fact]
+        //public void ControllerSelectsGroup()
+        //{
+        //    // Контекст контроллера
+        //    var controllerContext = new ControllerContext();
+        //    // Макет HttpContext
+        //    var moqHttpContext = new Mock<HttpContext>();
+        //    moqHttpContext.Setup(c => c.Request.Headers)
+        //    .Returns(new HeaderDictionary());
+        //    controllerContext.HttpContext = moqHttpContext.Object;
+        //    var controller = new ProductController()
+        //    { ControllerContext = controllerContext };
+        //}
         //    // arrange
         //    var controller = new ProductController();
         //    var data = TestData.GetDishesList();
