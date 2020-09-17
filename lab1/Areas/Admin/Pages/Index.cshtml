@@ -1,0 +1,71 @@
+﻿@page
+@model lab1.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@*<h1>Index</h1>*@
+
+    <p class="mt-2">
+        <a asp-page="Create" class="btn btn-outline-info">
+            <span class="fa fa-plus-circle"> Добавить</span>
+        </a>
+    </p>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Auto[0].AutoName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Auto[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Auto[0].AutoCost)
+            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.Auto[0].Image)
+        </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Auto[0].Group)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Auto) {
+        <tr>
+            <td>
+                <img src="~/Images/@item.Image" alt="NoImage" width="50" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutoName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutoCost)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Image)
+        </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Group.AutoGroupId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.AutoId"
+                   class="btn btn-outline-info">
+                    <span class="fas fa-edit"></span>
+                </a>
+                <a asp-page="./Delete" asp-route-id="@item.AutoId"
+                   class="btn btn-outline-danger">
+                    <span class="fas fa-trash-alt"></span>
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

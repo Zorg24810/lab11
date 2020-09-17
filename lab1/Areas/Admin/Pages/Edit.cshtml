@@ -1,11 +1,5 @@
 ﻿@page "{id:int}"
 @model lab1.EditModel
-@section Scripts{
-    <script src="~/js/bs-custom-file-input.js"></script>
-    <script>
-        bsCustomFileInput.init();
-    </script>
-}
 
 @{
     ViewData["Title"] = "Edit";
@@ -30,13 +24,8 @@
                 {
                     <h4>Файл изображения не задан</h4>
                 }
-                <div class="custom-file mt-3">
-                    <input type="file" class="custom-file-input"
-                           asp-for="Image" id="customFile">
-                    <label class="custom-file-label" for="customFile">
-                        Выберите файл изображения
-                    </label>
-                </div>
+            </div>
+               
                 <div class="form-group">
                     <label asp-for="Auto.AutoName" class="control-label"></label>
                     <input asp-for="Auto.AutoName" class="form-control" />
@@ -73,3 +62,9 @@
     <a asp-page="./Index">Back to List</a>
 </div>
 
+@section Scripts{
+    <script src="~/js/bs-custom-file-input.js"></script>
+    <script>
+            bsCustomFileInput.init();
+    </script>
+}

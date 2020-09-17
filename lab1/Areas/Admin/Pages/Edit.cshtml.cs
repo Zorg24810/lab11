@@ -19,15 +19,16 @@ namespace lab1
         private readonly WebLabsV05.DAL.Data.ApplicationDbContext _context;
 
         private IWebHostEnvironment _environment;
-        public EditModel(ApplicationDbContext context, IWebHostEnvironment env)
+
+        public EditModel(WebLabsV05.DAL.Data.ApplicationDbContext context, IWebHostEnvironment env)
         {
             _context = context;
             _environment = env;
         }
 
         [BindProperty]
-        public IFormFile Image { get; set; }
         public Auto Auto { get; set; }
+        public IFormFile Image { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

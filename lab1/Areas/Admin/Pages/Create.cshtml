@@ -1,11 +1,5 @@
 ﻿@page
 @model lab1.CreateModel
-@section Scripts{
-    <script src="~/js/bs-custom-file-input.js"></script>
-    <script>
-        bsCustomFileInput.init();
-    </script>
-}
 
 @{
     ViewData["Title"] = "Create";
@@ -58,4 +52,9 @@
     <a asp-page="Index">Back to List</a>
 </div>
 
-
+@section Scripts{
+    <script src="~/js/bs-custom-file-input.js"></script>
+    <script>
+            bsCustomFileInput.init();
+    </script>
+}
