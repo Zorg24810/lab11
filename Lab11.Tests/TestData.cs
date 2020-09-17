@@ -1,26 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WebLabsV05.DAL.Data;
 using WebLabsV05.Entities;
 
 namespace Lab11.Tests
 {
     public class TestData
     {
-        public static List<Auto> GetDishesList()
+        public static void FillContext(ApplicationDbContext context)
         {
-            return new List<Auto>
-            {
-
+            context.AutoGroups.Add(new AutoGroup
+            { GroupName = "fake group" });
+                  context.AddRange(new List<Auto>
+                 {
                     new Auto{ AutoId=1, AutoGroupId=1},
                     new Auto{ AutoId=2, AutoGroupId=1},
                     new Auto{ AutoId=3, AutoGroupId=1},
                     new Auto{ AutoId=4, AutoGroupId=2},
                     new Auto{ AutoId=5, AutoGroupId=2},
                     new Auto{ AutoId=6, AutoGroupId=2}
-            };
+                   });
+            context.SaveChanges();
         }
-        
+                
         public static IEnumerable<object[]> Params()
         {
             // 1-я страница, кол. объектов 3, id первого объекта 1

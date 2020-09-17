@@ -14,6 +14,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using lab1.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using lab1.Models;
 
 namespace lab1
 {
@@ -27,11 +30,14 @@ namespace lab1
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        [Obsolete]
+
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             // services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -47,6 +53,16 @@ namespace lab1
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddScoped<Cart>(sp => CartService.GetCart(sp));
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(opt =>
+            {
+                opt.Cookie.HttpOnly = true;
+                opt.Cookie.IsEssential = true;
+            });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,6 +94,7 @@ namespace lab1
             app.UseRouting();
 
             app.UseAuthentication();
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

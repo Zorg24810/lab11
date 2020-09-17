@@ -1,0 +1,61 @@
+﻿@page
+@model lab1.CreateModel
+@section Scripts{
+    <script src="~/js/bs-custom-file-input.js"></script>
+    <script>
+        bsCustomFileInput.init();
+    </script>
+}
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Auto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Auto.AutoName" class="control-label"></label>
+                <input asp-for="Auto.AutoName" class="form-control" />
+                <span asp-validation-for="Auto.AutoName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.Description" class="control-label"></label>
+                <input asp-for="Auto.Description" class="form-control" />
+                <span asp-validation-for="Auto.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.AutoCost" class="control-label"></label>
+                <input asp-for="Auto.AutoCost" class="form-control" />
+                <span asp-validation-for="Auto.AutoCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.Image" class="control-label"></label>
+                <div class="custom-file mt-3">
+                    <input type="file" asp-for="Image"
+                           class="custom-file-input" id="customFile">
+                    <label class="custom-file-label"
+                           for="customFile">Выберите файл</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Auto.AutoGroupId" class="control-label"></label>
+                <select asp-for="Auto.AutoGroupId" class="form-control" asp-items="ViewBag.AutoGroupId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+

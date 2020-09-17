@@ -3,8 +3,10 @@
 *@
 @{
 }
-    <a asp-controller="Cart" asp-action="Index"
-       class="navbar-text ml-auto">
-        00,0 руб.(0)
-        <i class="fa fa-shopping-cart nav-color"></i>
-    </a>
+@model Cart
+<a asp-controller="Cart"
+   asp-action="Index"
+   class="navbar-text ml-auto">
+    @Model.AutoCost стоимость <i class="fas fa-shopping-cart navcolor"></i>
+    (@Model.Count)
+</a>

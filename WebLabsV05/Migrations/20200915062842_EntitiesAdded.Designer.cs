@@ -10,8 +10,8 @@ using WebLabsV05.DAL.Data;
 namespace WebLabsV05.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200914090220_Lab8")]
-    partial class Lab8
+    [Migration("20200915062842_EntitiesAdded")]
+    partial class EntitiesAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
