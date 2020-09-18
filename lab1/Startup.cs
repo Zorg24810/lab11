@@ -17,6 +17,8 @@ using lab1.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using lab1.Models;
+using Microsoft.Extensions.Logging;
+using lab1.Extensions;
 
 namespace lab1
 {
@@ -70,12 +72,16 @@ namespace lab1
                                 IWebHostEnvironment env,
                                 ApplicationDbContext context,
                                 UserManager<ApplicationUser> userManager,
-                                RoleManager<IdentityRole> roleManager)
+                                RoleManager<IdentityRole> roleManager,
+                                ILoggerFactory logger)
         {
+            logger.AddFile("Logs/log-{Date}.txt");
+
             DbInitializer.Seed(context, userManager, roleManager)
              .GetAwaiter()
              .GetResult();
 
+            
 
             if (env.IsDevelopment())
             {
@@ -90,6 +96,7 @@ namespace lab1
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseFileLogging();
 
             app.UseRouting();
 

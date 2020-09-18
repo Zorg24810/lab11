@@ -16,7 +16,8 @@ namespace lab1.Components
             Text="Каталог"},
             new MenuItem{ IsPage=true, Area="Admin", Page="/Index",
             Text="Администрирование"},
-            new MenuItem{ Controller="Home", Action="Index", Text="Test"}
+           // new MenuItem{ Controller="Home", Action="Index", Text="Test"},
+            new MenuItem{ IsPage=true, Area="ApiDemo", Page="/Index", Text="API-demo"}
         };
         public IViewComponentResult Invoke()
         {

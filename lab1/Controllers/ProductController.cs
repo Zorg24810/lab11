@@ -7,6 +7,7 @@ using lab1.Models;
 using Microsoft.AspNetCore.Mvc;
 using WebLabsV05.Entities;
 using WebLabsV05.DAL.Data;
+using Microsoft.Extensions.Logging;
 
 namespace lab1.Controllers
 {
@@ -22,8 +23,10 @@ namespace lab1.Controllers
         }
         [Route("Catalog")]
         [Route("Catalog/Page_{pageNo}")]
-        public IActionResult Index(int? group, int pageNo = 1)
+        public IActionResult Index(int? group, int pageNo=1)
         {
+            //var groupName = group.HasValue? _context.AutoGroups.Find(group.Value)?.GroupName: "all groups";
+            //_logger.LogInformation($"info: group={group}, page={pageNo}");
             var autosFiltered = _context.Autos.Where(d => !group.HasValue || d.AutoGroupId == group.Value);
             // Поместить список групп во ViewData
             ViewData["Groups"] = _context.AutoGroups;
@@ -35,6 +38,15 @@ namespace lab1.Controllers
             else
                 return View(model);
         }
+
+        //private ILogger _logger;
+        //public ProductController(ApplicationDbContext context,
+        //ILogger<ProductController> logger)
+        //{
+        //    _pageSize = 3;
+        //    _context = context;
+        //    _logger = logger;
+        //}
       
 
     }
