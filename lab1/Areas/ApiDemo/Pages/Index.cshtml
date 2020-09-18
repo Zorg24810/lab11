@@ -1,0 +1,58 @@
+﻿@page
+@model lab1.Areas.ApiDemo.Pages.IndexModel
+@{
+}
+
+<table class="table table-striped table-sm" id="list">
+</table>
+<div class="lead" id="info"></div>
+
+@section Scripts{
+    <script>
+        var url = "@Url.Action("GetAutos", "Autoes")";
+        $(document).ready(function () {
+                // послать запрос
+                $.getJSON(url, function (data) {
+                // найти таблицу по id
+                var table = $("#list");
+                // сформировать строку для каждого полученного объекта
+                $.each(data, function (num, value) {createRow(num+1, value).appendTo(table);
+                })
+            });
+        })
+        // Функция формирования одной строки таблицы
+        // index - порядковый номер
+        // data - объект данных
+        function createRow(index, data) {
+        // создать строку таблицы
+        var row = $("<tr>");
+        // добавть колонку с порядковым номером
+        row.append("<td>" + index + "</td>");
+        // добавить колонку с названием
+        row.append("<td>" + data.autoName + "</td>");
+        // создать кнопку
+        var button = $("<button>")
+        .addClass("btn btn-success") // стиль кнопки
+        .click(data.autoId, showDetails) // подписка на событие click
+        .text("Подробно"); // надпись
+        // создать колонку с кнопкой
+        var td = $("<td>").append(button);
+        // добавить в строку таблицы
+        row.append(td);
+        return row;
+        }
+        //Функция выода информации о выбранном объекте
+        function showDetails(e) {
+        // Послать запрос
+        $.getJSON(url + "/" + e.data, function (data) {
+        // строка информации об объекте
+        var details = data.autoName + ": "
+        + data.description + " - "
+        + data.autoCost + " стоимость ";
+        $("#info") // Найти блок для информации
+        .empty() // очистить содержимое
+        .text(details); // записать новый текст
+        })
+        }
+    </script>
+}
